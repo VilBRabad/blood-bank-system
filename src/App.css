@@ -1,0 +1,33 @@
+.Navbar{
+  width: 100%;
+  z-index: 10;
+  /* display: block; */
+  position: sticky;
+  top: 0;
+  /* bottom: 0;
+  left: 0; */
+}
+.Navbar .list{
+  background-color: var(--lt-red);
+  width: 50%;
+  height: 2.6em;
+  margin-top: 10px;
+  border-radius: 20px;
+  box-shadow: 2px 3px 9px var(--md-red);
+}
+.list ul{
+  justify-content: space-around;
+  width: 70%;
+}
+.list ul li{
+  list-style: none;
+  font-weight: 500;
+  font-size: 1.1rem;
+  color: white;
+  /* color: rgb(48, 10, 10); */
+  cursor: pointer;
+  transition: 0.2s all ease-in-out;
+}
+.list ul li:hover{
+  color: rgb(184, 92, 92);
+}

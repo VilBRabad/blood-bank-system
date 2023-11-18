@@ -1,0 +1,83 @@
+.home{
+   height: 95vh;
+   width: 100vw;
+   z-index: 5;
+}
+.content{
+   height: 150%;
+   width: 150%;
+   border-bottom-left-radius: 100rem;
+   border-bottom-right-radius: 100rem;
+   align-items: center;
+   justify-content: flex-end;
+   transform: translate(-17%, -50%);
+   background: linear-gradient(#feb4b424, rgb(224, 54, 54));
+   /* z-index: 5; */
+   box-shadow: 0px 40px 0px #fa9a9aee, 0px 90px 0px #feb4b481;
+   flex-direction: column;
+}
+.content::after{
+   content: "";
+   position: absolute;
+   width: 100%;
+   height: 100%;
+   background-image: url("../images/home.jpg");
+   background-size: cover;
+   background: no-repeat cover;
+   background-blend-mode:multiply;
+   border-bottom-left-radius: 100rem;
+   border-bottom-right-radius: 100rem;
+   opacity: 0.2;
+}
+.content div{
+   flex-direction: column;
+   height: 50%;
+   width: auto;
+   justify-content: center;
+   align-items: center;
+}
+.content span{
+   color: white;
+   font-size: 3em;
+   font-weight: 800;
+   letter-spacing: 10px;
+}
+.content p{
+   color: white;
+   font-size: 1.5rem;
+   letter-spacing: 35px;
+}
+.content form{
+   z-index: 10;
+}
+.content form .formDiv{
+   height: 2.7rem;
+   width: 20rem;
+   flex-direction: row;
+   background-color: white;
+   margin-top: 3rem;
+   border-radius: 20px;
+}
+.search-icon{
+   font-size: 1.6em;
+   cursor: pointer;
+}
+.content form input{
+   outline: none;
+   border: none;
+   font-size: 1.1em;
+   width: 80%;
+}
+
+.helpy{
+   position: absolute;
+   font-size: 2.5em;
+   bottom: 15px;
+   right: 10px;
+   color: rgb(94, 11, 11);
+   cursor: pointer;
+   transition: 0.2s all ease-in-out;
+}
+.helpy:hover{
+   color: var(--dk-red);
+}
