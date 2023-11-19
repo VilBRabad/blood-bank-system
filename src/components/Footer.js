@@ -3,7 +3,7 @@ import "./Footer.css";
 
 function Footer() {
   return (
-    <div className="footer flex">
+    <div className="footer flex rel">
       <div className="side1">
          <span className="title">Donate.me	&#169;</span>
          <h3>About Us</h3>

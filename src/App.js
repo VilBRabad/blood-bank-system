@@ -1,8 +1,16 @@
 import './App.css';
+import { useState } from 'react';
 import Home from "./components/Home.js";
 import Footer from './components/Footer.js';
 
 function App() {
+
+  const [showLogin, setShowLogin] = useState(false);
+
+  const showIt = (e)=>{
+    setShowLogin(!showLogin);
+  }
+
   return (
     <div className="App">
       <header className="Navbar flex ali-cent just-cent abs">
@@ -10,12 +18,12 @@ function App() {
           <ul className="flex">
             <li>Home</li>
             <li>About</li>
-            <li>Login</li>
+            <li onClick={showIt}>Login</li>
           </ul>
         </div>
       </header>
-      <Home/>
-      <Footer/>
+      <Home prop={{showLogin, setShowLogin}}/>
+      {/* <Footer/> */}
     </div>
   );
 }
