@@ -12,10 +12,10 @@
    height: 35%;
    flex-direction: column;
    justify-content: space-between;
-   border-bottom-left-radius: 20px;
-   border-bottom-right-radius: 20px;
-   box-shadow: 0px 20px 0px #003434;
-   transform: translateY(-60%);
+   /* border-bottom-left-radius: 20px;
+   border-bottom-right-radius: 20px; */
+   /* box-shadow: 0px 20px 0px #003434; */
+   transform: translateY(-65%);
    transition: 0.3s all ease-in-out;
    z-index: 6;
 }
