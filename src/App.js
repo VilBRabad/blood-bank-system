@@ -7,6 +7,7 @@ import Navbar from './components/Navbar.js';
 import ErrorPage from './components/ErrorPage.js';
 import LabDasboard from './components/labDasboard.js';
 
+
 function App() {
 
   const [showLogin, setShowLogin] = useState(false);
@@ -18,7 +19,7 @@ function App() {
         <Routes>
           <Route path="/" element={ <Navbar fun={ { showLogin, setShowLogin } } /> }>
             <Route index element={ <Home prop={ { showLogin, setShowLogin } } /> } />
-            <Route exact path="lab" element={ <LabDasboard /> } />
+            <Route exact path="lab" element={ <LabDasboard /> }/>
             <Route exact path=":path" element={ <ErrorPage /> } />
           </Route>
         </Routes>
