@@ -2,19 +2,24 @@ import React, { useEffect, useState } from 'react'
 import "./Home.css";
 import { CiSearch } from "react-icons/ci";
 import { BiSolidHelpCircle } from "react-icons/bi";
+import Footer from './Footer';
 
 function Home(props) {
 
-   const [vis1, setVis1] = useState("visible");
-   const [vis2, setVis2] = useState("");
+   const [vis1, setVis1] = useState("");
+   const [vis2, setVis2] = useState("visible");
    const [vis3, setVis3] = useState("");
    const [check, setCheck] = useState(false);
    const [show, setShow] = useState("hide");
    const [vis4, setVis4] = useState("switch");
+   const [textChange, setTextChange] = useState("Already have account?");
+   const [addblur, setAddBlur] = useState("");
 
    const selectChange = (e) => {
       const type = e.target.value;
-      if (type === "lab") {
+      document.getElementById("lab-form").reset();
+      document.getElementById("admin-form").reset();
+      if (type === "doner") {
          setVis2("");
          setVis1("visible");
       }
@@ -23,31 +28,39 @@ function Home(props) {
          setVis2("visible");
       }
    }
+
    let x= props.prop.showLogin;
    useEffect(()=>{
       if(x){
          setShow("show");
+         setAddBlur("blure");
       }
       else{
          setShow("hide");
+         setAddBlur("");
       }
    }, [x]);
 
    const loginSwitch = (e)=>{
       setCheck(!check);
+      document.getElementById("lab-form").reset();
+      document.getElementById("admin-form").reset();
+      document.getElementById("login-form").reset();
       if(check){
          setVis3("switch");
          setVis4("");
+         setTextChange("Not Resister!");
       }
       else{
          setVis3("");
          setVis4("switch");
+         setTextChange("Already have account?");
       }
    }
 
    return (
       <div className="home rel">
-         <div className="content rel flex">
+         <div className={`content ${addblur} rel flex`}>
             <div className="flex rel">
                <span>DONATE BLOOD</span>
                <p>Save Life</p>
@@ -61,122 +74,100 @@ function Home(props) {
          </div>
          <div className={`form flex just-cent ${show}`}>
             <div className="login flex">
-               <div>
-                  <label htmlFor="option">Choose Type : </label>
-                  <select name="option" id="type-list" onChange={ selectChange }>
+               <div className="options">
+                  <label htmlFor="select">Select Type: </label>
+                  <select name="select" id="select" onChange={selectChange}>
                      <option value="lab">Lab/Hospital</option>
-                     <option value="individual">Individual</option>
+                     <option value="doner">Doner</option>
                   </select>
                </div>
                <div className={`forms ${vis3}`}>
-                  {/* Login form for Individual Person */ }
-                  <form action="#" className={ `individual ${vis1}` }>
+                  {/* For Lab/Hospitals Login Page */ }
+                  <form action="#" className={ `lab ${vis1}`} id="lab-form">
                      <div className="names flex">
-                        <div className="input">
-                           <label htmlFor="fname">First Name</label>
-                           <input type="text" name="fname" />
+                        <div className="input lab-name">
+                           <input type="text" name="name" required/>
+                           <label htmlFor="name">Lab/Hospital Name:</label>
                         </div>
                         <div className="input">
-                           <label htmlFor="mname">Middle Name</label>
-                           <input type="text" name="mname" />
-                        </div>
-                        <div className="input">
-                           <label htmlFor="lname">Last Name</label>
-                           <input type="text" name="lname" />
+                           <input type="text" name="id" required/>
+                           <label htmlFor="id">Licensed ID:</label>
                         </div>
                      </div>
                      <div className="det flex">
                         <div className="input mb">
+                           <input type="number" name="mobile" required/>
                            <label htmlFor="mobile">Mobile No.</label>
-                           <input type="number" name="mobile" />
                         </div>
-                        <div className="input dob">
-                           <label htmlFor="dob">DOB : </label>
-                           <input type="date" name="dob" id="dob" />
-                        </div>
-                     </div>
-                     <div className="per-det">
-                        <select name="gen" id="gen">
-                           <option value="gender">Select Gender</option>
-                           <option value="male">Male</option>
-                           <option value="female">Female</option>
-                        </select>
-                        <select name="type" id="type">
-                           <option value="bloodtype">Blood Type</option>
-                           <option value="apositive">A+</option>
-                           <option value="anegative">A-</option>
-                           <option value="bpositive">B+</option>
-                           <option value="bnegative">B-</option>
-                           <option value="abpositive">AB+</option>
-                           <option value="abnegative">AB-</option>
-                           <option value="opositive">O+</option>
-                           <option value="onegative">O-</option>
-                        </select>
                      </div>
                      <div className="addr flex">
                         <div className="input add">
+                           <input type="text"  name="address" required/>
                            <label htmlFor="address">Address </label>
-                           <input type="text" name="address" />
                         </div>
                         <div className="input">
+                           <input type="Number" name="pincode" required/>
                            <label htmlFor="pincode"> Pin Code : </label>
-                           <input type="Number" name="pincode" />
                         </div>
                      </div>
                      <button type="submit">Submit</button>
                   </form>
-                  {/* For Lab/Hospitals Login Page */ }
-                  <form action="#" className={ `lab ${vis2}` }>
+                  <form action="#" className={`admin ${vis2}`} id="admin-form">
                      <div className="names flex">
-                        <div className="input lab">
-                           <label htmlFor="name">Lab/Hospital Name</label>
-                           <input type="text" name="name" />
+                        <div className="input">
+                           <input type="text" name="fname" required/>
+                           <label htmlFor="fname">First Name:</label>
                         </div>
                         <div className="input">
-                           <label htmlFor="id">Lab/Hospital ID</label>
-                           <input type="text" name="id" />
+                           <input type="text" name="mname" required/>
+                           <label htmlFor="mname">Middle Name:</label>
+                        </div>
+                        <div className="input">
+                           <input type="text" name="lname" required/>
+                           <label htmlFor="lname">Last Name:</label>
                         </div>
                      </div>
                      <div className="det flex">
                         <div className="input mb">
+                           <input type="number" name="mobile" required/>
                            <label htmlFor="mobile">Mobile No.</label>
-                           <input type="number" name="mobile" />
                         </div>
-                        {/* <div className="input dob">
+                        <div className="input dob flex">
                            <label htmlFor="dob">DOB : </label>
-                           <input type="date" name="dob" id="dob" />
-                        </div> */}
+                           <input type="date" name="dob" id="dob" required/>
+                        </div>
                      </div>
                      <div className="addr flex">
                         <div className="input add">
+                           <input type="text" name="address" required/>
                            <label htmlFor="address">Address </label>
-                           <input type="text" name="address" />
                         </div>
                         <div className="input">
+                           <input type="Number" name="pincode" required/>
                            <label htmlFor="pincode"> Pin Code : </label>
-                           <input type="Number" name="pincode" />
                         </div>
                      </div>
                      <button type="submit">Submit</button>
                   </form>
                </div>
                <div className={`login-form flex ${vis4}`}>
-                  <form action="#">
+                  <form action="#" className="flex" id="login-form">
                      <div className="input">
+                        <input type="text" name="username" required/>
                         <label htmlFor="username">Username</label>
-                        <input type="text" name="username" />
                      </div>
                      <div className="input">
+                        <input type="text" name="password" required/>
                         <label htmlFor="password">Password</label>
-                        <input type="text" name="password" />
                      </div>
                      <button type="submit">Login</button>
                   </form>
                </div>
-               <a href="#" onClick={loginSwitch}>Already have a Account?</a>
+               <a href="#" onClick={loginSwitch}>{textChange}</a>
             </div>
          </div>
          <BiSolidHelpCircle className="helpy" />
+        <Footer />
       </div>
    )
 }
