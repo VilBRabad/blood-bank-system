@@ -121,7 +121,7 @@ function DonerDashbord() {
                   <span>769879876</span>
                   <span>07/12/2023</span>
                   <span>30/11/2023</span>
-                  <span>PDF</span>
+                  <span className="pdf"><i className='bx bxs-file-pdf'></i></span>
                   <span className="cancle"><button>Cancel</button></span>
                </div>
             </div>
