@@ -6,12 +6,13 @@ import Home from "./components/Home.js";
 import Navbar from './components/Navbar.js';
 import ErrorPage from './components/ErrorPage.js';
 import LabDasboard from './components/labDasboard.js';
+import DonerDashbord from './components/DonerDashbord.js';
 
 
 function App() {
 
   const [showLogin, setShowLogin] = useState(false);
-
+  
 
   return (
     <div className="App">
@@ -20,6 +21,7 @@ function App() {
           <Route path="/" element={ <Navbar fun={ { showLogin, setShowLogin } } /> }>
             <Route index element={ <Home prop={ { showLogin, setShowLogin } } /> } />
             <Route exact path="lab" element={ <LabDasboard /> }/>
+            <Route exact path="doner" element={ <DonerDashbord/> }/>
             <Route exact path=":path" element={ <ErrorPage /> } />
           </Route>
         </Routes>

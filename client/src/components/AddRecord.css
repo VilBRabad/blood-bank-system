@@ -59,9 +59,10 @@
 }
 
 .forms .new{
-   background-color: #355e3b;
+   background-color: #6D8B74;
    padding: 30px 10px;
    color: white;
+   border-radius: 20px;
 }
 .forms .new form{
    flex-direction:  column;

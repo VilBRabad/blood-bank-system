@@ -171,7 +171,7 @@
    width: 15rem;
    height: 4rem;
    font-size: 1.5em;
-   background: linear-gradient(rgb(249, 130, 130), rgb(207, 112, 112));
+   background: #164863;
    outline: none;
    border: none;
    transition: 0.3s all ease-in-out;

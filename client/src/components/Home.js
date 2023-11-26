@@ -4,6 +4,8 @@ import { CiSearch } from "react-icons/ci";
 import { BiSolidHelpCircle } from "react-icons/bi";
 import Footer from './Footer';
 import { useNavigate } from 'react-router-dom';
+import Reviews from './Reviews.js';
+import About from './About.js';
 
 function Home(props) {
 
@@ -130,7 +132,8 @@ function Home(props) {
    }
 
    return (
-      <div className="home rel">
+      <>
+      <div className="home rel" id="about">
          <div className={`content ${addblur} rel flex`}>
             <div className="flex rel">
                <span>DONATE BLOOD</span>
@@ -244,8 +247,16 @@ function Home(props) {
             </div>
          </div>
          <BiSolidHelpCircle className="helpy" />
-        <Footer />
       </div>
+      {
+      !x? <>
+         <About/>
+         <Reviews/>
+         <Footer />
+         </>
+      :<></>
+      }
+      </>
    )
 }
 

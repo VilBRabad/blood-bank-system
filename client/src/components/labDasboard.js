@@ -30,7 +30,7 @@ function LabDasboard() {
 
   const handleClick = (e) => {
     setIsDown(!isDown);
-    document.getElementById("add-btn").disabled = true;
+    // document.getElementById("add-btn").disabled = true;
     if (isDown) {
       setDown("up");
       setHide("vis");

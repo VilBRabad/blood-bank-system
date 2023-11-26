@@ -38,8 +38,8 @@ function Navbar(props) {
       <header className="Navbar flex ali-cent just-cent abs">
          <div className="list flex ali-cent just-cent">
             <ul className="flex">
-               <li onClick={ goHome }><NavLink to="/">Home</NavLink></li>
-               <li onClick={ goHome }><NavLink to="/About">About</NavLink></li>
+               <li onClick={ goHome }><NavLink to="/" href="#home">Home</NavLink></li>
+               <li onClick={ goHome }><NavLink to="#About">About</NavLink></li>
                <li onClick={ goLogin }><NavLink to="#">{login}</NavLink></li>
                {/* {addNavList && <li>Vilas</li>} */}
             </ul>
