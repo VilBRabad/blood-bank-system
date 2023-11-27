@@ -70,9 +70,14 @@
    border-radius: 10px;
    cursor: pointer;
 }
+   
 .Card .date{
    color: rgb(0, 194, 0);
 }
+.Card .no-date{
+   color: rgb(249, 6, 6);
+}
+
 .doner-contain .Card.num{
    background-color: rgb(0, 128, 187);
    color: white;
@@ -81,7 +86,7 @@
    width: 15rem;
 }
 .doner-contain .Card.dt{
-   width: 15rem;
+   width: 17rem;
    padding: 0px 15px;
 }
 
@@ -158,5 +163,11 @@
    font-size: 1.7em;
    color:  rgb(173, 1, 1);
    cursor: pointer;
+}
+.appointment .not-found{
+   font-size: 5em;
+   font-weight: 800;
+   justify-content: center;
+   opacity: 0.4;
 }
 

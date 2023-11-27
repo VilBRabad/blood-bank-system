@@ -328,14 +328,13 @@ hr{
    background-color: #008b8b;
 }
 
-
 .confirmation{
    background: #79dec236;
    height: 50%;
    border-radius: 20px;
    width: 30%;
    box-shadow: 3px 3px 6px black;
-   transform: translateY(-120%);
+   transform: translateY(-130%);
    transition: 0.3s all ease-in-out;
 }
 .confirmation form{

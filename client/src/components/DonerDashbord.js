@@ -16,7 +16,7 @@ function DonerDashbord() {
    const [blur, setBlur] = useState("");
 
    const upDownHandle = () => {
-      if (down == "") {
+      if (down === "") {
          setDown("down");
          setShow("show");
          setBlur("blur");
@@ -42,6 +42,21 @@ function DonerDashbord() {
    const goDashboardHandle = ()=>{
       setIsAppointForm(false);
       setShowAppoints(false);
+   }
+
+   const submitHandle = (e)=>{
+      e.preventDefault();
+      window.alert("Successfully Submitted")
+   }
+
+   const [hide, setHide] = useState(true);
+   const cancelHandle = (e)=>{
+      e.preventDefault();
+      let x = window.confirm("Do yo Want to Cancel");
+      // console.log(x);
+      if(x){
+         setHide(true);
+      }
    }
 
    return (
@@ -71,7 +86,19 @@ function DonerDashbord() {
                   <span >Book Apointment</span>
                </div>
                <div className="Card dt" onClick={showAppHandle}>
-                  <span>Appointment: <span className="date">28/11/2023</span></span>
+                  <span>
+                     Appointment:  
+                     {!hide
+                     ?
+                     <span className="date">
+                        28/11/2023
+                     </span>
+                     :
+                     <span className="no-date">
+                         --/--/----
+                     </span>
+                     }
+                  </span>
                </div>
             </div>
             {
@@ -102,7 +129,7 @@ function DonerDashbord() {
                            </div>
                         </div>
                         <div className="btn flex just-cent ali-cent">
-                           <button type="submit">Submit</button>
+                           <button type="submit" onClick={submitHandle}>Submit</button>
                         </div>
                      </form>
                   </div>
@@ -110,6 +137,9 @@ function DonerDashbord() {
                </>
                :
             <div className="appointment">
+               {
+               !hide
+               ?<>
                <div className="header flex">
                   <span>ID</span>
                   <span>Booked Date</span>
@@ -122,8 +152,16 @@ function DonerDashbord() {
                   <span>07/12/2023</span>
                   <span>30/11/2023</span>
                   <span className="pdf"><i className='bx bxs-file-pdf'></i></span>
-                  <span className="cancle"><button>Cancel</button></span>
+                  <span className="cancle"><button onClick={cancelHandle}>Cancel</button></span>
                </div>
+               </>
+               :
+                  <div className="not-found flex">
+                     <span>
+                        Not Book Appointment
+                     </span>
+                  </div>
+               }
             </div>
             }
          </div>

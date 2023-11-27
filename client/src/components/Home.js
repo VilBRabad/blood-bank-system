@@ -127,8 +127,28 @@ function Home(props) {
       setDonerResister({...donerResister, [name]:value});
    }
 
-   const postDonerResisterData = (e)=>{
+   const postDonerResisterData = async(e)=>{
       e.preventDefault();
+      const {fname, mname, lname, mobile, age, address, pincode} = donerResister;
+      
+      const res = await fetch("/donerResister", {
+         method: "POST",
+         headers: {
+           "Content-Type": "application/json"
+         },
+         body: JSON.stringify({
+           fname:fname,
+           mname:mname,
+           lname:lname,
+           mobile:mobile,
+           age:age,
+           address:address,
+           pincode:pincode
+         })
+      });
+      const data = await res.json();
+
+      console.log(data);
    }
 
    return (
@@ -189,7 +209,7 @@ function Home(props) {
                      </div>
                   </form>
                   {/* Doner Resister Form */}
-                  <form action="#" className={`admin ${vis2}`} id="admin-form">
+                  <form method="POST" className={`admin ${vis2}`} id="admin-form">
                      <div className="names flex">
                         <div className="input">
                            <input type="text" name="fname" autoComplete="off" value={donerResister.fname} onChange={donerResistrationChangesHandle} required/>
