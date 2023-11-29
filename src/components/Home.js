@@ -63,7 +63,7 @@ function Home(props) {
       }
    }
 
-   // Login Handling
+   //*********************** Login Handling *******************************
    const [loginData, setLoginData] = useState({
       username: "",
       password: ""
@@ -76,6 +76,7 @@ function Home(props) {
       setLoginData({...loginData, [name]:value});
    }
 
+   //======= Posting Login form data to Server ===========
    const postLoginData = (e)=>{
       e.preventDefault();
       if(loginData.username === "Vilas" && loginData.password === "Rabad"){
@@ -88,7 +89,7 @@ function Home(props) {
    }
 
 
-   //Lab Resistration Handling
+   //**************** Lab Resistration Handling ***************************
    const [labResiter, setLabResister] = useState({
       name: "",
       id: "",
@@ -104,17 +105,20 @@ function Home(props) {
       setLabResister({...labResiter, [name]:value});
    }
 
+   //========== Posting Hospital Resister Form Data to Server ==========
    const postLabResisterData = (e)=>{
       e.preventDefault();
    }
 
 
-   //Doner Resistration Handling
+   //***************** Doner Resistration Handling *************************
    const [donerResister, setDonerResister] = useState({
       fname: "",
       mname: "",
       lname: "",
       mobile: "",
+      gender: "",
+      blood: "",
       age: "",
       address: "",
       pincode: ""
@@ -127,9 +131,10 @@ function Home(props) {
       setDonerResister({...donerResister, [name]:value});
    }
 
+   //=========== Posting Resister Form data to Server ==============
    const postDonerResisterData = async(e)=>{
       e.preventDefault();
-      const {fname, mname, lname, mobile, age, address, pincode} = donerResister;
+      const {fname, mname, lname, mobile, gender, blood, age, address, pincode} = donerResister;
       
       const res = await fetch("/donerResister", {
          method: "POST",
@@ -141,14 +146,23 @@ function Home(props) {
            mname:mname,
            lname:lname,
            mobile:mobile,
+           gender:gender,
+           blood:blood,
            age:age,
            address:address,
            pincode:pincode
          })
       });
       const data = await res.json();
-
-      console.log(data);
+      if(data.code === 200){
+         window.alert("Resistration Successfully...");
+      }
+      else if(data.code === 202){
+         window.alert("Moile No. Aready Reasister.!!");
+      }
+      else{
+         window.alert("Server ERROR!");
+      }
    }
 
    return (
@@ -228,6 +242,28 @@ function Home(props) {
                         <div className="input mb">
                            <input type="number" name="mobile" autoComplete="off" value={donerResister.mobile} onChange={donerResistrationChangesHandle} required/>
                            <label htmlFor="mobile">Mobile No.</label>
+                        </div>
+                        <div className="input blood">
+                           {/* <input type="number" name="gender" id="gender" autoComplete="off" value={donerResister.age} onChange={donerResistrationChangesHandle} required/> */}
+                           <select name="blood" id="blood" value={donerResister.blood} onChange={donerResistrationChangesHandle}>
+                              <option value="null">Select</option>
+                              <option value="A+">A+</option>
+                              <option value="A-">A-</option>
+                              <option value="B+">B+</option>
+                              <option value="B-">B-</option>
+                              <option value="AB+">AB+</option>
+                              <option value="AB-">AB-</option>
+                              <option value="O+">O+</option>
+                              <option value="O-">O-</option>
+                           </select>
+                        </div>
+                        <div className="input gen">
+                           {/* <input type="number" name="gender" id="gender" autoComplete="off" value={donerResister.age} onChange={donerResistrationChangesHandle} required/> */}
+                           <select name="gender" id="gender" value={donerResister.gender} onChange={donerResistrationChangesHandle}>
+                              <option value="null">Select</option>
+                              <option value="Male">Male</option>
+                              <option value="Femal">Female</option>
+                           </select>
                         </div>
                         <div className="input age">
                            <input type="number" name="age" id="age" autoComplete="off" value={donerResister.age} onChange={donerResistrationChangesHandle} required/>

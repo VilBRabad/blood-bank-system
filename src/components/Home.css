@@ -192,11 +192,13 @@ input, select{
 .names .lab-name input{
    width: 23rem;
 }
-.mb, .per-det, .age{
+.mb, .per-det, .age, .gen{
    margin: 10px 0px;
 }
+
 .per-det input, 
 .per-det select, 
+.det select,
 .mb{
    margin-right: 10px;
 }
@@ -204,8 +206,20 @@ input, select{
    font-weight: 700;
 }
 .mb input{
-   width: 17rem;
+   width: 13rem;
 }
+.gen select,
+.blood select{
+   margin-right: 10px;
+   width: 100px;
+}
+.forms form .input.blood select{
+   margin-top: 15px;
+}
+.age input{
+   width: 80px;
+}
+
 input{
    padding: 5px;
 }
