@@ -17,11 +17,14 @@ function Home(props) {
    const [vis4, setVis4] = useState("switch");
    const [textChange, setTextChange] = useState("Already have account?");
    const [addblur, setAddBlur] = useState("");
+   // const [storeType, setStoreType] = useState=("");
 
    const navigate = useNavigate();
 
    const selectChange = (e) => {
       const type = e.target.value;
+      console.log(type)
+      // setStoreType(type);
       document.getElementById("lab-form").reset();
       document.getElementById("admin-form").reset();
       if (type === "doner") {
@@ -63,6 +66,7 @@ function Home(props) {
       }
    }
 
+
    //*********************** Login Handling *******************************
    const [loginData, setLoginData] = useState({
       username: "",
@@ -76,21 +80,40 @@ function Home(props) {
       setLoginData({...loginData, [name]:value});
    }
 
-   //======= Posting Login form data to Server ===========
-   const postLoginData = (e)=>{
+   // //======= Posting Login form data to Server ===========
+   const postLoginData = async(e)=>{
       e.preventDefault();
-      if(loginData.username === "Vilas" && loginData.password === "Rabad"){
-         window.alert("Successfully login....");
-         navigate("/lab");
-      }
-      else{
-         window.alert("Wrong Credentials...");
-      }
+   //    const {username, password} = loginData;
+
+   //    const res = await fetch("/loginHandling", {
+   //       method: "POST",
+   //       headers: {
+   //         "Content-Type": "application/json"
+   //       },
+   //       body: JSON.stringify({
+   //          username, password, Type:storeType
+   //       })
+   //    });
+
+   //    const data = await res.json();
+   //    if(data.code === 200 && storeType === "doner"){
+   //       navigate("/doner");
+   //    }
+   //    else if(data.code === 200){
+   //       navigate("/lab");
+   //    }
+   //    else if(data.code === 400){
+   //       window.alert("Wrong Credentials");
+   //    }
+   //    else{
+   //       window.alert("Server ERROR!");
+   //    }
    }
 
 
    //**************** Lab Resistration Handling ***************************
    const [labResiter, setLabResister] = useState({
+      username: "",
       name: "",
       id: "",
       mobile: "",
@@ -106,8 +129,33 @@ function Home(props) {
    }
 
    //========== Posting Hospital Resister Form Data to Server ==========
-   const postLabResisterData = (e)=>{
+   const postLabResisterData = async(e)=>{
       e.preventDefault();
+      // const {username, name, id, mobile, address, pincode} = labResiter;
+
+      // const res = await fetch("/labResister", {
+      //    method: "POST",
+      //    headers: {
+      //      "Content-Type": "application/json"
+      //    },
+      //    body: JSON.stringify({
+      //       username, name, id, mobile, address, pincode
+      //    })
+      // });
+
+      // const data = await res.json();
+      // if(data.code === 200){
+      //    window.alert("Resistration Successfully, Password sent on mobile number...");
+      // }
+      // else if(data.code === 403){
+      //    window.alert("ID Aready EXISTS.!!");
+      // }
+      // else if(data.code === 500){
+      //    window.alert("Internal Server Error!!");
+      // }
+      // else{
+      //    window.alert("Server ERROR!");
+      // }
    }
 
 
@@ -131,7 +179,7 @@ function Home(props) {
       setDonerResister({...donerResister, [name]:value});
    }
 
-   //=========== Posting Resister Form data to Server ==============
+   //=========== Posting Doner Resister Form data to Server ==============
    const postDonerResisterData = async(e)=>{
       e.preventDefault();
       const {fname, mname, lname, mobile, gender, blood, age, address, pincode} = donerResister;
@@ -155,16 +203,20 @@ function Home(props) {
       });
       const data = await res.json();
       if(data.code === 200){
-         window.alert("Resistration Successfully...");
+         window.alert("Resistration Successfully, Password sent on mobile number...");
       }
-      else if(data.code === 202){
+      else if(data.code === 403){
          window.alert("Moile No. Aready Reasister.!!");
+      }
+      else if(data.code === 500){
+         window.alert("Internal Server Error!!");
       }
       else{
          window.alert("Server ERROR!");
       }
    }
 
+   //console.lo("Vil")
    return (
       <>
       <div className="home rel" id="about">
@@ -191,7 +243,7 @@ function Home(props) {
                </div>
                <div className={`forms ${vis3}`}>
                   {/* For Lab/Hospitals Resister Page */ }
-                  <form action="#" className={ `lab ${vis1}`} id="lab-form">
+                  <form method="POST" className={ `lab ${vis1}`} id="lab-form">
                      <div className="names flex">
                         <div className="input lab-name">
                            <input type="text" name="name" autoComplete="off" value={labResiter.name} onChange={labResistrationChangesHandle} required/>
@@ -203,6 +255,10 @@ function Home(props) {
                         </div>
                      </div>
                      <div className="det flex">
+                        {/* <div className="input mb">
+                           <input type="text" name="username" autoComplete="off" value={labResiter.username} onChange={labResistrationChangesHandle} required/>
+                           <label htmlFor="username">Username</label>
+                        </div> */}
                         <div className="input mb">
                            <input type="number" name="mobile" autoComplete="off" value={labResiter.mobile} onChange={labResistrationChangesHandle} required/>
                            <label htmlFor="mobile">Mobile No.</label>
@@ -317,3 +373,4 @@ function Home(props) {
 }
 
 export default Home;
+

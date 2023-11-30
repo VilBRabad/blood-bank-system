@@ -1,3 +1,4 @@
+"use client"
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { useState } from 'react';
@@ -12,7 +13,6 @@ import DonerDashbord from './components/DonerDashbord.js';
 function App() {
 
   const [showLogin, setShowLogin] = useState(false);
-  
 
   return (
     <div className="App">
