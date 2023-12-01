@@ -110,7 +110,7 @@
 .f2 .input input{
    width: 13rem;
 }
-.f2 form .input.in2{
+.f2 form .input.in2, .f2 form .input.dt{
    margin-left: 20px;
 }
 .f2 form .input select{

@@ -202,6 +202,9 @@ input, select{
 .mb{
    margin-right: 10px;
 }
+.mb.user{
+   margin-right: 35px;
+}
 .det span{
    font-weight: 700;
 }

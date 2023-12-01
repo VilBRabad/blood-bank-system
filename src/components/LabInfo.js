@@ -69,7 +69,7 @@ function LabInfo(props) {
                      <span>Welcome</span>
                      <div className="flex">
                         <button id="add-btn" onClick={goToAddRecords}>Add Record</button>
-                        <button onClick={ goToRequestList }>See Requests</button>
+                        <button onClick={ goToRequestList }>See Appointments</button>
                      </div>
                   </div>
                </div>

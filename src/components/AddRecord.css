@@ -87,6 +87,7 @@
 
 .forms .old{
    margin-top: 30px;
+   width: 100%;
 }
 .forms .old .fetch{
    gap: 20px;
@@ -95,3 +96,52 @@
 .forms .old button{
    margin-top: 25px;
 }
+
+.fetchbtn{
+   background-color: rgb(0, 146, 199);
+   padding: 7px 15px;
+   border-radius: 10px;
+   color: white;
+   margin-top: 25px;
+   cursor: pointer;
+   border: 1px solid black;
+}
+
+.data{
+   width: 100%;
+   margin-top: 20px;
+   display: flex;
+   justify-content: center;
+   height: 7rem;
+}
+.data .detail{
+   width: 90%;
+}
+.detail .cardp{
+   justify-content: space-around;
+   gap: 4px;
+   margin-bottom: 5px;
+}
+.detail .cardp span{
+   width: 100%;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   height: 4em;
+   background-color: #00000014;
+   /* transition: 0.2s all ease-in-out; */
+}
+.cardp:hover span{
+   background-color:  #0000002c;
+}
+
+.old .popup{
+   transform: translateY(-20%);
+}
+
+.old .translate{
+   top: 75%;
+   transform: translateY(-263%);
+   /* transform: translateY(-140%); */
+}
+

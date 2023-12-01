@@ -11,22 +11,22 @@ import DonerDashbord from './components/DonerDashbord.js';
 
 
 function App() {
-
+  
   const [showLogin, setShowLogin] = useState(false);
 
   return (
-    <div className="App">
-      <Router>
-        <Routes>
-          <Route path="/" element={ <Navbar fun={ { showLogin, setShowLogin } } /> }>
-            <Route index element={ <Home prop={ { showLogin, setShowLogin } } /> } />
-            <Route exact path="lab" element={ <LabDasboard /> }/>
-            <Route exact path="doner" element={ <DonerDashbord/> }/>
-            <Route exact path=":path" element={ <ErrorPage /> } />
-          </Route>
-        </Routes>
-      </Router>
-    </div>
+      <div className="App">
+        <Router>
+          <Routes>
+            <Route path="/" element={ <Navbar fun={ { showLogin, setShowLogin } } /> }>
+              <Route index element={ <Home prop={ { showLogin, setShowLogin } } /> } />
+              <Route exact path="lab" element={ <LabDasboard /> }/>
+              <Route exact path="doner" element={ <DonerDashbord/> }/>
+              <Route exact path=":path" element={ <ErrorPage /> } />
+            </Route>
+          </Routes>
+        </Router>
+      </div>
   );
 }
 
