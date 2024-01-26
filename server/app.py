@@ -1,4 +1,4 @@
-from flask import json, Flask, request, jsonify, session
+from flask import Flask, request, jsonify, session
 import mysql.connector
 import pymysql
 import os 
