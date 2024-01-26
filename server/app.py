@@ -1,5 +1,6 @@
 from flask import json, Flask, request, jsonify, session
 import mysql.connector
+import pymysql
 import os 
 import random
 import string
@@ -30,7 +31,17 @@ conn = mysql.connector.connect(
     database=DB_NAME
 )
 cursor = conn.cursor()
+
+#**************** Using pymysql *******************
+# conn = pymysql.connect(
+#     host="localhost",
+#     user="root",
+#     password=DB_PASS,
+#     database=DB_NAME
+# )
+# cursor = conn.cursor()
  
+
 
 #***************** Func to Create Random Password *************
 def generatePassword():
@@ -59,6 +70,16 @@ def sendPasswordToMobile(password, mobile):
     if message.sid:
         return True
     return False
+
+@app.route("/isAuthenticated")
+def isAuthenticated(): 
+    if 'username' in session:
+        print(session['username'])
+        # session.pop('username', None)
+        return jsonify({"isAuth": True})
+    else:
+        return jsonify({"isAuth": False})
+    
 
 
 #********************* Doner Resister **************************
@@ -152,7 +173,7 @@ def labResister():
         conn.commit()
 
         print("151")
-        # ======== Finding if Already username is present or not
+        # ======== Find username if Already username is present or not
         query = "SELECT Name FROM Admin WHERE Admin_id=%s"
         cursor.execute(query, (username,))
         admin = cursor.fetchone()
@@ -166,6 +187,13 @@ def labResister():
         values2 = (username, id, username, password,)
         cursor.execute(query2, values2)
         conn.commit()
+
+        query = "INSERT INTO Blood_Inventory(Hospital_id, Blood_id, Blood_group, Available_unit, Hospital_location) VALUES(%s, %s, %s, %s, %s)"
+        groups = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"]
+        for i in range(1, 9):
+            cursor.execute(query, (id, str(i), groups[i-1], '0', address,))
+            print(i)
+            conn.commit()
 
         return jsonify({"message":"Successful", "code":200})
 
@@ -337,6 +365,7 @@ def postFetchData():
     except Exception as e:
         return jsonify({"message":"Failed", "code":402})
 
+
 @app.route("/bloodDonation", methods=['POST'])
 def bloodDonation():
     try:
@@ -363,6 +392,122 @@ def bloodDonation():
     except Exception as e:
         return jsonify({"message":"Failed", "code":402})
 
+
+
+@app.route("/statesHandle")
+def statesHandle():
+    try:
+        username = session['username']
+        print(username)
+        qGetHospId ="SELECT Hospital_id FROM Admin WHERE Admin_id=%s"
+        cursor.execute(qGetHospId, (username,))
+        hosp_id = cursor.fetchone()[0]
+        print(hosp_id)
+
+        dataDict= []
+        query = "SELECT SUM(Available_unit) FROM Blood_Inventory WHERE Hospital_id=%s"
+        cursor.execute(query, (hosp_id, ))
+        totSum = cursor.fetchone()[0]
+        # print(totSum)
+        dataDict.append(totSum)
+
+        print("398")
+        query = "SELECT COUNT(Donation_id) AS Cnt FROM blood_donation WHERE Hospital_id=%s"
+        cursor.execute(query, (hosp_id, ))
+        totDoner = str(cursor.fetchone()[0])
+        dataDict.append(totDoner)
+
+        print("414")
+        x = 1
+        for i in range(1, 5):
+            query = "SELECT SUM(Available_unit) AS sumBlood FROM Blood_Inventory WHERE Hospital_id=%s AND (Blood_id=%s OR Blood_id=%s)"
+            cursor.execute(query, (hosp_id, str(x), str(x+1),))
+            tot = cursor.fetchone()[0]
+            dataDict.append(tot)
+            x = x+2
+
+        # print(dataDict)
+        return jsonify({"data":dataDict})
+    except Exception as e:
+        return jsonify({"message":"Failed", "code":402, "data":404})
+
+
+@app.route("/searchBloodByPin", methods=['POST'])
+def searchBloodByPin():
+    try:
+        data = request.get_json()
+        pincode = data.get("pinCode")
+
+        query = f"SELECT H.Name AS Hospital_Name, H.Location AS Hospital_Location, BI.Available_unit, BI.Blood_group, H.Hospital_id FROM Hospital H JOIN Blood_Inventory BI ON H.Hospital_id = BI.Hospital_id WHERE H.Location LIKE '%{pincode}' AND Available_unit>=1;"
+        # print(query)
+        cursor.execute(query)
+        # print("vil")
+        data = cursor.fetchall()
+        # print(data)
+
+        return jsonify({"code":200, "data":data})
+    except Exception as e:
+        return jsonify({"message":"Failed", "code":402})
+
+@app.route("/requestForBlood", methods=['POST'])
+def requestForBlood():
+    try:
+        data = request.get_json()
+        name = data.get("name")
+        mobile = data.get("mobile")
+        msg= data.get("msg")
+        clickData =  data.get("clickData")
+        hospital_id = clickData[4]
+        Hosp_name = clickData[0]
+        blood_group = clickData[3]
+
+        curDate = str(date.today())
+
+        query = "INSERT INTO Query(Name, Mobile_no, Text, date, Hospital_name, Hospital_id, Blood_group) VALUES(%s, %s, %s, %s, %s, %s, %s)"
+        values = (name, mobile, msg, curDate, Hosp_name, hospital_id, blood_group,)
+        cursor.execute(query, values)
+
+        conn.commit()
+        return jsonify({"code":200})
+    except Exception as e:
+        return jsonify({"message":"Failed", "code":402})
+
+
+@app.route("/fetchLoadData")
+def fetchLoadData():
+    try:
+        usename = session['username']
+        query = "SELECT Hospital_id FROM Admin WHERE Admin_id = %s"
+        cursor.execute(query, (usename,))
+        hosp_id = cursor.fetchone()[0]
+
+        # print(hosp_id)
+        query = "SELECT Query_id, Name, Mobile_no, Text, date FROM Query WHERE Hospital_id = %s"
+        # print(query)
+        cursor.execute(query, (hosp_id, ))
+        data = cursor.fetchall()
+        
+        # print(data)
+        return jsonify({"code":200, "data":data})
+    except Exception as e:
+        return jsonify({"message":"Failed", "code":402})
+
+
+@app.route("/acceptRequest", methods=['POST'])
+def acceptRequest():
+    try:
+        data = request.get_json()
+        query_id = int(data.get("query_id"))
+
+        print(query_id)
+        query = f"UPDATE Query_status SET Status = 'Accept' WHERE Query_id={query_id}"
+        print(query)
+        cursor.execute(query)
+        conn.commit()
+        print("506")
+        return jsonify({"code":200, "message":"accepted"})
+    except Exception as e:
+        return jsonify({"message":"Failed", "code":402})
 
 @app.route("/")
 def home():
