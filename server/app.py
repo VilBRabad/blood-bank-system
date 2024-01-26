@@ -443,7 +443,7 @@ def searchBloodByPin():
         cursor.execute(query)
         # print("vil")
         data = cursor.fetchall()
-        # print(data)
+        print(data)
 
         return jsonify({"code":200, "data":data})
     except Exception as e:

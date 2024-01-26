@@ -3,11 +3,11 @@ Enhanced with additional functionalities beyond a typical Blood Bank System, our
 
 
 ## Content:
-   1. [Setup](#setup)
-   1. [Objective](#objectives)
-   2. [Features](#features)
-   2. [Challenges](#challenges)
-   2. [Diagrams](#diagrams)
+   1. [Setup](#1-setup)
+   1. [Objective](#2-objectives)
+   2. [Features](#3-features)
+   2. [Challenges](#4-challenges)
+   2. [Diagrams](#5-diagrams)
    <!-- 2. [Conclusion](#) -->
 
 
@@ -78,5 +78,28 @@ Enhanced with additional functionalities beyond a typical Blood Bank System, our
 
 1. Schema Diagram
 ![Schemas](./ReadmeImages/Schemas_Diagram.jpg)
+
+
+## Screenshots
+Some screenshots.....
+1. Home Page
+![home](./ReadmeImages/db4.png)
+
+2. Login/Register
+![register](./ReadmeImages/db5.png)
+![login](./ReadmeImages/db6.png)
+
+3. Search Blood
+![blood_search](./ReadmeImages/db1.png)
+
+4. Hospital Dashboard
+![hDashboard](./ReadmeImages/db2.png)
+![hDashboard](./ReadmeImages/db7.png)
+
+5. Search doners
+![hDashboard](./ReadmeImages/db3.png)
+
+6. Doner Dashboard
+![hDashboard](./ReadmeImages/db8.png)
 
 
